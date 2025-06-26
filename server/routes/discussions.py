@@ -1,8 +1,8 @@
+from models.discussion import Discussion
+from models.user import User
+from models.course import Course
+from __init__ import db
 from flask import Blueprint, request, jsonify
-from server.models.discussion import Discussion
-from server.models.user import User
-from server.models.course import Course
-from server.app import db
 
 discussions_bp = Blueprint('discussions', __name__)
 

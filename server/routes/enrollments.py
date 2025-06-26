@@ -1,8 +1,8 @@
+from models.enrollment import Enrollment
+from models.user import User
+from models.course import Course
+from __init__ import db
 from flask import Blueprint, request, jsonify
-from server.models.enrollment import Enrollment
-from server.models.user import User
-from server.models.course import Course
-from server.app import db
 
 enrollments_bp = Blueprint('enrollments', __name__)
 
@@ -52,16 +52,11 @@ def create_enrollment():
     if existing_enrollment:
         return jsonify({'error': 'User is already enrolled in this course'}), 400
     
-    # Progress validation
-    progress = data.get('progress', 0)
-    if not isinstance(progress, int) or progress < 0 or progress > 100:
-        return jsonify({'error': 'Progress must be a number between 0 and 100'}), 400
-    
     # Create enrollment
     new_enrollment = Enrollment(
         user_id=data['user_id'],
         course_id=data['course_id'],
-        progress=progress
+        progress=data.get('progress', 0)
     )
     
     try:
@@ -78,10 +73,7 @@ def update_enrollment(id):
     data = request.get_json()
     
     if 'progress' in data:
-        progress = data['progress']
-        if not isinstance(progress, int) or progress < 0 or progress > 100:
-            return jsonify({'error': 'Progress must be a number between 0 and 100'}), 400
-        enrollment.progress = progress
+        enrollment.progress = data['progress']
     
     try:
         db.session.commit()

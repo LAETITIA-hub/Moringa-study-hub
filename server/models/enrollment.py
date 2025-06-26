@@ -1,4 +1,4 @@
-from server.app import db
+from __init__ import db
 from datetime import datetime
 
 class Enrollment(db.Model):

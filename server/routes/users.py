@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
-from server.models.user import User
-from server.app import db
+from models.user import User
+from __init__ import db
 from email_validator import validate_email, EmailNotValidError
 
 users_bp = Blueprint('users', __name__)

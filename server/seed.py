@@ -1,8 +1,8 @@
-from server.app import app, db
-from server.models.user import User
-from server.models.course import Course
-from server.models.enrollment import Enrollment
-from server.models.discussion import Discussion
+from app import app, db
+from models.user import User
+from models.course import Course
+from models.enrollment import Enrollment
+from models.discussion import Discussion
 import os
 
 def seed_database():
